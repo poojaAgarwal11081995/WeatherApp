@@ -5,12 +5,9 @@ import React, { Component } from "react";
 import { reqWeatherData } from "./../action/action";
 import TextField from "@material-ui/core/TextField";
 import * as Constant from "./../action/Constants";
-import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
-import { Button, IconButton, Typography } from "@material-ui/core";
+import {  IconButton, Typography } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
-
 
 class PageOne extends Component {
 	constructor(props) {
@@ -21,7 +18,7 @@ class PageOne extends Component {
 			main:{},
 			sys:{}
 		};
-		// alert(JSON.stringify(props))
+		
 	}
 
 	handleSubmit = (event) => {
@@ -33,9 +30,7 @@ class PageOne extends Component {
 
 		this.props.reqWeatherData(data.search, this);
 	};
-	//  componentDidMount(){
-	// 	this.props.reqWeatherData(); 
-	//  }
+	
 	handleChange = (input) => (e) => {
 		console.log("input", input);
 		console.log("value", e.target.value);
@@ -43,10 +38,7 @@ class PageOne extends Component {
 			[input]: e.target.value,
 		});
 	};
-	handledate =(x)=>{
-		const date = new Date(x);
-		return date.toLocaleDateString()
-	}
+	
 	render() {
 		const { search ,main,sys} = this.state;
 		return (
@@ -71,11 +63,6 @@ class PageOne extends Component {
 					<SearchIcon />
 					</IconButton>
 </div>
-						
-					
-					
-					
-
 				</form>
 			</div>
 			
@@ -85,7 +72,7 @@ class PageOne extends Component {
 							return <div key={key} >
 							<p>{search}({sys[Constant.COUNTRY]})</p>
 							<h1>{item[Constant.MAIN]}</h1>
-							<p>Current tempreture {search} is  <h2>{main[Constant.TEMP]}<sup>'0 C</sup> </h2> </p>
+							<p>Current tempreture {search} is  <h2>{main[Constant.TEMP]} °C</h2> </p>
 							
 							</div>
 						})

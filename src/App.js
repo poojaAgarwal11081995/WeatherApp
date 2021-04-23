@@ -9,9 +9,7 @@ function App() {
 		<div className="App">
 			<Switch>
 				<Route exact path="/" component={PageOne} />
-				<Route exact path="/pagetwo" component={PageTwo} />
-				
-			</Switch>
+				</Switch>
 		</div>
 	);
 }
