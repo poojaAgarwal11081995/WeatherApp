@@ -85,7 +85,7 @@ class PageOne extends Component {
 							return <div key={key} >
 							<p>{search}({sys[Constant.COUNTRY]})</p>
 							<h1>{item[Constant.MAIN]}</h1>
-							<p>Current tempreture {search} is  <h2>{main[Constant.TEMP]}<sup>'0</sup> </h2> </p>
+							<p>Current tempreture {search} is  <h2>{main[Constant.TEMP]}<sup>'0 C</sup> </h2> </p>
 							
 							</div>
 						})
