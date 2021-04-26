@@ -1,6 +1,6 @@
 /** @format */
 
-import PageOne from "./PageOne";
-import PageTwo from "./PageTwo";
+import WeatherApp from "./WeatherApp";
 
-export { PageOne, PageTwo };
+
+export { WeatherApp };

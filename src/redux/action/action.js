@@ -16,7 +16,7 @@ export const reqWeatherData = (search,context) =>(dispatch)=> {
 			payload: resRes,
 		})
 	}).catch(err => {
-		console.log(err)
+		alert("City not found")
 	})
 		
 		

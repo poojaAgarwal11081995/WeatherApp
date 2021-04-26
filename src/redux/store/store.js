@@ -1,11 +1,11 @@
 /** @format */
 import { createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import reducers from "./../reduser";
+import reducer from "../reduser";
 const initialState = {};
 
 const store = createStore(
-	reducers,
+	reducer,
 	initialState,
 	compose(applyMiddleware(thunk)),
 );

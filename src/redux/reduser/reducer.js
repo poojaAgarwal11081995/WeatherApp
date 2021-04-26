@@ -1,8 +1,8 @@
 /** @format */
-const initialState = [];
-const reduser = (state = initialState, action) => {
+const initialState = {};
+const reducer = (state = initialState, action) => {
 	// alert(JSON.stringify(state));
-	if (action != undefined && action.type != undefined) {
+	if (action !== undefined && action.type !== undefined) {
 		if (
 			!(typeof action === "undefined") &&
 			!(typeof action.payload === "undefined")
@@ -13,4 +13,4 @@ const reduser = (state = initialState, action) => {
 		return state;
 	}
 };
-export default reduser;
+export default reducer;
