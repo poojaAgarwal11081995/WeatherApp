@@ -8,8 +8,7 @@ import * as Constants from "../redux/action/Constants";
 import Container from "@material-ui/core/Container";
 import {  IconButton, Typography } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
-
-import {toast} from "react-toastify"
+import {toast} from "react-toastify";
 class WeatherApp extends Component {
 	constructor(props) {
 		super(props);
@@ -22,25 +21,26 @@ class WeatherApp extends Component {
 		};
 		
 	}
-
+	
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const { search } = this.state;
 		let data = {
 			[Constants.SEARCH]: search,
           };
-        
-		this.props.reqWeatherData(data.search, this);
+        this.getWeatherData(data.search)
 		this.setState({
 			search:""
 		})
 		
 	};
+	getWeatherData=(data)=>{
+		this.props.reqWeatherData(data, this);
+	}
 	
 	
 	handleChange = (input) => (e) => {
-		e.preventDefault();
-		console.log("input", input);
+	   console.log("input", input);
 		console.log("value", e.target.value);
 		this.setState({
 			[input]: e.target.value,
@@ -75,7 +75,7 @@ class WeatherApp extends Component {
 			
 				
 					{
-						this.state.data ? 
+						this.state.data !== undefined && this.state.data !== []  ? 
 						this.state.data.map((item,key)=>{
 							return <div key={key} >
 							<h1>{item[Constants.MAIN]}</h1>
@@ -86,39 +86,38 @@ class WeatherApp extends Component {
 							</div>
 						}):null
 					}
-				
-				
-
-			
 			</Container>
 		);
 	}
 	handleResponse =(nextprops)=>{
-		console.log("nextProps",nextprops)
-		
+		console.log("nextProps",nextprops);
 		var respObj = null;
-		if(nextprops){
+		
+			
 			if(nextprops.cod === 200){
 				respObj ={
-					[Constants.KEY_DATA]:nextprops.weather	,
+					[Constants.KEY_DATA]:nextprops.weather,
 					[Constants.MAIN]:nextprops.main,
 					[Constants.NAME]:nextprops.name,
 					[Constants.SYS]:nextprops.sys
 				}
 				this.setState(respObj)
 			}else{
-				toast(nextprops.message)
-			}
-		}
-		
-		
+				  toast(nextprops.message);	
+				  this.setState({
+					[Constants.KEY_DATA]:[],
+					[Constants.NAME]:"",
+					[Constants.MAIN]:"",
+					[Constants.SYS]:""
+				  });
+				  console.log(this.state);
+              }	
 	}
 }
 
 
 const mapStateToProps = (response) => {
-	console.log("response",response);
-	return {
+return {
 		[Constants.KEY_DATA] :response};
 };
 
