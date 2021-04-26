@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import {  IconButton, Typography } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
 
+import {toast} from "react-toastify"
 class WeatherApp extends Component {
 	constructor(props) {
 		super(props);
@@ -50,12 +51,10 @@ class WeatherApp extends Component {
 		const { search ,main,sys,name} = this.state;
 		return (
 			<Container maxWidth="lg">
-			<div>
+			<div className="div">
 			    <form onSubmit={this.handleSubmit}>
-					<Typography style={styles.Typography}>Weather App</Typography>
-					
-					
-                      <div style={styles.textField}>
+					<Typography color="secondary" variant="h4">Weather App</Typography>
+					<div className="textarea">
                        <TextField
 					        id="standard-basic"
 							label="search by city name..."
@@ -63,19 +62,20 @@ class WeatherApp extends Component {
 							value={search}
 							type="text"
 							onChange={this.handleChange("search")}
+							className="textfield"
 							variant="outlined"
-							
-							
+							color="secondary"
 						/>
-						<IconButton onClick={this.handleSubmit}>
-					<SearchIcon />
-					</IconButton>
-</div>
+						<IconButton className="btn"  onClick={this.handleSubmit}>
+					      <SearchIcon />
+					    </IconButton>
+                       </div>
 				</form>
 			</div>
 			
 				
 					{
+						this.state.data ? 
 						this.state.data.map((item,key)=>{
 							return <div key={key} >
 							<h1>{item[Constants.MAIN]}</h1>
@@ -84,7 +84,7 @@ class WeatherApp extends Component {
 							<p>Current tempreture {name} is  <strong>{main[Constants.TEMP]} °C</strong> </p>
 							
 							</div>
-						})
+						}):null
 					}
 				
 				
@@ -95,43 +95,31 @@ class WeatherApp extends Component {
 	}
 	handleResponse =(nextprops)=>{
 		console.log("nextProps",nextprops)
+		
 		var respObj = null;
 		if(nextprops){
-			respObj ={
-				[Constants.KEY_DATA]:nextprops.weather	,
-				[Constants.MAIN]:nextprops.main,
-				[Constants.NAME]:nextprops.name,
-				[Constants.SYS]:nextprops.sys
+			if(nextprops.cod === 200){
+				respObj ={
+					[Constants.KEY_DATA]:nextprops.weather	,
+					[Constants.MAIN]:nextprops.main,
+					[Constants.NAME]:nextprops.name,
+					[Constants.SYS]:nextprops.sys
+				}
+				this.setState(respObj)
+			}else{
+				toast(nextprops.message)
 			}
-			this.setState(respObj)
 		}
+		
 		
 	}
 }
-const styles = {
-	div: {
-		border: "1px solid red",
-		display: "flex",
-		padding: 40,
-		width: "300px",
-		alignItem: "center",
-		justifyContent: "center",
-		marginTop: 70,
-		bockgroundColor: "transparent",
-	},
-	Typography: {
-		fontWidth: "bold",
-		fontSize: "30px",
-	},
-	textField:{
-		
-		marginTop:45,
-	}
-};
+
 
 const mapStateToProps = (response) => {
 	console.log("response",response);
-	return response;
+	return {
+		[Constants.KEY_DATA] :response};
 };
 
 

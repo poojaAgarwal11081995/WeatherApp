@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+.div{
+  flex: 1;
+  margin-top: 40px;
+  height: 200px;
+}
+.textarea{
+  margin: 50px;
+  padding: 20px;
+
+}
+.textfield{
+width: 350px;
+}
+.btn{
+  padding-left: 30px;
+}
+

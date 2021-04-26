@@ -8,7 +8,8 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
 import { BrowserRouter } from "react-router-dom";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import App from "./App";
 ReactDOM.render(
@@ -16,7 +17,20 @@ ReactDOM.render(
 	
 		<Provider store={store}>
 			<BrowserRouter basename="/">
-				<App />
+			<ToastContainer
+position="top-right"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+<App />
+<ToastContainer />
+				
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,

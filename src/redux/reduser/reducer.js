@@ -1,5 +1,5 @@
 /** @format */
-const initialState = {};
+const initialState = { message: '' };
 const reducer = (state = initialState, action) => {
 	// alert(JSON.stringify(state));
 	if (action !== undefined && action.type !== undefined) {
