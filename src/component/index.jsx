@@ -1,6 +1,6 @@
 /** @format */
 
-import WeatherApp from "./WeatherApp";
+import WeatherComponent from "./WeatherComponent";
 
 
-export { WeatherApp };
+export { WeatherComponent };
